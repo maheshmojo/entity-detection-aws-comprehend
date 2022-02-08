@@ -18,7 +18,7 @@ def predict():
     	message = request.form['message']
 		data = [message] 
 		data = obj.get()['Body'].read().decode("utf-8")
-    	text_redact = comprehend.detect_sentiment(Text=data , LanguageCode='en')
+    	text_redact = comprehend.detect_sentiment	(Text=data , LanguageCode='en')
 		my_prediction = json.dumps(text_redact)
     return render_template('result.html', prediction=my_prediction)
    
