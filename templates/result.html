@@ -23,10 +23,10 @@
 		<!-- Result -->
 		<div class="results">
 			{% if prediction==1 %}
-				<h1>Prediction: <span class='danger'>Be Alert! This is a SPAM Message.</span></h1>
+				<h1>Prediction: <span class='danger'>Feedback is Postive.</span></h1>
 				<img class="image" src="{{ url_for('static', filename='SpamHound_Icon.png') }}" alt="SPAM Image">
 			{% elif prediction==0 %}
-				<h1>Prediction: <span class='safe'>Great! This is NOT a Spam Message.</span></h1>
+				<h1>Prediction: <span class='safe'>Feedback is Negative.</span></h1>
 				<img class="image" src="{{ url_for('static', filename='Safe.png') }}" alt="Not a spam image">
 			{% endif %}
 		</div>
