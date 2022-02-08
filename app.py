@@ -1,4 +1,5 @@
 # Importing essential libraries
+from cgitb import text
 from email import message
 from flask import Flask, render_template, request
 import pickle
@@ -14,12 +15,15 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
-    if request.method == 'POST':
-    	message = request.form['message']
-		data = [message] 
-		data = obj.get()['Body'].read().decode("utf-8")
-    	text_redact = comprehend.detect_sentiment	(Text=data , LanguageCode='en')
-		my_prediction = json.dumps(text_redact)
+    text = "President Ram Nath Kovind, who is currently on Uttar Pradesh visit, will arrive in Lucknow by the presidential train on Monday (June 28, 2021) morning. The President will arrive in the state capital for a two-day visit and will return to Delhi on a plane from Lucknow airport the next day.President Kovind is scheduled to board the presidential train from Kanpur railway station at 10 am on Monday. After an estimated 90-minutes journey, President Kovind will reach Lucknow’s Charbagh railway station, the President will head straight to Raj Bhavan where he will stay overnight."
+
+    print('Calling DetectSentiment')
+    print(json.dumps(comprehend.detect_sentiment(Text=text, LanguageCode='en'), sort_keys=True, indent=4))
+    print('End of DetectSentiment\n')
+
+    print('Calling DetectEntities')
+    print(json.dumps(comprehend.detect_entities(Text=text, LanguageCode='en'), sort_keys=True, indent=4))
+    print('End of DetectEntities\n')
     return render_template('result.html', prediction=my_prediction)
    
 
